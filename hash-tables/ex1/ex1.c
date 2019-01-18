@@ -34,7 +34,7 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
       }
       else
       {
-        return NULL;
+        count++;
       }
     }
   }
