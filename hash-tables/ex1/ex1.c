@@ -27,10 +27,11 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
     if (search != -1)
     {      
       Answer *answer = create_answer(search, i);
+      destroy_hash_table(ht);
       return answer;
     }
   }
-
+  destroy_hash_table(ht);
   return NULL;
 }
 

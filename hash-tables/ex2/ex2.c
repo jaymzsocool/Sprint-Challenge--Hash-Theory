@@ -13,15 +13,13 @@ char **reconstruct_trip(Ticket **tickets, int length)
   {
     hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
   }
-  char curr_ticket = hash_table_retrieve(ht, "NONE");  
+  char *curr_ticket = "NONE";  
   for (int i = 0; i < length; i++)
   {
-    char last_ticket = curr_ticket;
-    curr_ticket = hash_table_retrieve(ht, last_ticket);
-    route[i] = last_ticket;
-  }
-  
-
+    route[i] = hash_table_retrieve(ht, curr_ticket);
+    curr_ticket = route[i];    
+  } 
+  destroy_hash_table(ht);
   return route;
 }
 
