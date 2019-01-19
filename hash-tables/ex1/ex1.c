@@ -13,31 +13,24 @@ Answer *create_answer(int i1, int i2)
 }
 
 
+
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
-  HashTable *ht = create_hash_table(16);  
+  HashTable *ht = create_hash_table(16); 
   for (int i = 0; i < length; i++)
   {
-    hash_table_insert(ht,  weights[i],  i);    
+    hash_table_insert(ht,  weights[i],  i);
   }
-  int count = 0;
-  if(length > 1)
+  for (int i = 0; i < length; i++)
   {
-    for (int i = count + 1; i < length; i++)
-    { 
-      int a = hash_table_retrieve(ht, count);
-      int b = hash_table_retrieve(ht, i);
-      if( a + b == limit)
-      {
-        Answer *answer = create_answer(i, count);
-        return answer;
-      }
-      else
-      {
-        count++;
-      }
+    int search = hash_table_retrieve(ht, limit - weights[i]);       
+    if (search != -1)
+    {      
+      Answer *answer = create_answer(search, i);
+      return answer;
     }
   }
+
   return NULL;
 }
 
